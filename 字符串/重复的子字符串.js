@@ -25,35 +25,39 @@
  * s 由小写英文字母组成
  */
 
-var repeatedSubstringPattern = function(s) {
-    if(s.length === 1){
-        return false
+var repeatedSubstringPattern = function (s) {
+  if (s.length === 1) {
+    return false;
+  }
+
+  let flag = true;
+  let startIndex = 1;
+  for (let i = 0; i < Math.floor(s.length / 2); i++) {
+    let res = [];
+
+    let child = s.slice(0, i + 1);
+    startIndex = i + 1;
+    while (startIndex + i < s.length) {
+      let compare = s.slice(startIndex, startIndex + i + 1);
+      if (compare.indexOf(child) === -1) {
+        flag = false;
+        break;
+      } else {
+        res.push(true);
+      }
+      startIndex += i + 1;
     }
-
-    let flag = true
-    let  startIndex = 1
-    for(let i = 0 ;i < Math.floor(s.length / 2); i++){
-        let res = []
-
-        let child = s.slice(0,i + 1)
-        startIndex = i + 1
-        while((startIndex + i ) < s.length){
-            let compare = s.slice(startIndex, startIndex + i + 1 )
-            if(compare.indexOf(child) === -1){
-                flag = false
-                break
-            }else{
-                res.push(true)
-            }
-            startIndex += i + 1
-        }
-        if(!res.includes(false) && res.length !== 0 && (res.length + 1 )=== s.length / (i + 1)){
-            flag = true
-            break
-        }
+    if (
+      !res.includes(false) &&
+      res.length !== 0 &&
+      res.length + 1 === s.length / (i + 1)
+    ) {
+      flag = true;
+      break;
     }
+  }
 
-    return flag
+  return flag;
 };
 
-console.log(repeatedSubstringPattern("babbabbabbabbab"))
+console.log(repeatedSubstringPattern("babbabbabbabbab"));

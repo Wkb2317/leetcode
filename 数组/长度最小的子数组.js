@@ -13,26 +13,25 @@
  * 1 <= nums[i] <= 10^5
  */
 
-
 // 滑动窗口
 // while循环
-function  foo(s, nums){
-    let start = 0
-    let end = 0
-    let min = 100001
-    let sum = 0
+function foo(s, nums) {
+  let start = 0;
+  let end = 0;
+  let min = 100001;
+  let sum = 0;
 
-    while(end < nums.length){
-        sum += nums[end]
+  while (end < nums.length) {
+    sum += nums[end];
 
-        while(sum >= s){
-            min = Math.min(end - start + 1, min)
-            sum -= nums[start++]
-        }
-        end++
+    while (sum >= s) {
+      min = Math.min(end - start + 1, min);
+      sum -= nums[start++];
     }
+    end++;
+  }
 
-    return min === 100001 ? 0: min
+  return min === 100001 ? 0 : min;
 }
 
-console.log(foo(7,[2,3,1,2,4,3]))
+console.log(foo(7, [2, 3, 1, 2, 4, 3]));
