@@ -43,13 +43,12 @@ var combinationSum = function (candidates, target) {
   let result = [];
   let path = [];
   let sum = 0;
-  let startIndex = 0;
 
   candidates.sort((a, b) => {
     return a > b ? 1 : -1;
   });
 
-  function track(candidates) {
+  function track(candidates, startIndex) {
     if (sum > target) {
       return;
     }
@@ -68,7 +67,7 @@ var combinationSum = function (candidates, target) {
     }
   }
 
-  track(candidates, startIndex);
+  track(candidates, 0);
   return result;
 };
 
