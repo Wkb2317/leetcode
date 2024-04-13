@@ -36,7 +36,11 @@ candidates 的所有元素 互不相同
  * @return {number[][]}
  */
 var combinationSum = function (candidates, target) {
-  if (candidates.length === 0) {
+  candidates.sort((a, b) => {
+    return a > b ? 1 : -1;
+  });
+
+  if (candidates[0] > target) {
     return [];
   }
 
@@ -44,21 +48,17 @@ var combinationSum = function (candidates, target) {
   let path = [];
   let sum = 0;
 
-  candidates.sort((a, b) => {
-    return a > b ? 1 : -1;
-  });
-
   function track(candidates, startIndex) {
-    if (sum > target) {
-      return;
-    }
-
     if (sum === target) {
       result.push([...path]);
       return;
     }
 
-    for (let i = startIndex; i < candidates.length; i++) {
+    for (
+      let i = startIndex;
+      i < candidates.length && sum + candidates[i] <= target;
+      i++
+    ) {
       path.push(candidates[i]);
       sum += candidates[i];
       track(candidates, i);
