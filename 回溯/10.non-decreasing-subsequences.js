@@ -37,14 +37,14 @@ var findSubsequences = function (nums) {
 
     for (let i = startIndex; i < array.length; i++) {
       if (
-        (nums[i] < path[path.length - 1] && path.length > 0) ||
-        used[nums[i] + 100] === true
+        (array[i] < path[path.length - 1] && path.length > 0) ||
+        used[array[i] + 100] === true
       ) {
         continue;
       }
 
       path.push(array[i]);
-      used[nums[i] + 100] = true;
+      used[array[i] + 100] = true;
 
       track(array, i + 1);
       path.pop();
